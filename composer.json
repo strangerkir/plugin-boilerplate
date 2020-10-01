@@ -21,7 +21,10 @@
     "phpunit/phpunit": "^7.0 | ^8.0",
     "johnpbloch/wordpress-core": "^5.0@stable",
     "vimeo/psalm": "^3.11.7",
-    "slevomat/coding-standard": "^6.0"
+    "slevomat/coding-standard": "^6.0",
+    "behat/behat":	"^2.4",
+    "behat/mink": "^1.5"
+
   },
   "autoload": {
     "psr-4": {

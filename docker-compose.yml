@@ -15,6 +15,7 @@ services:
     container_name: "${PROJECT_NAME}_wp_dev"
     depends_on:
       - db
+      - behat
     restart: unless-stopped
     environment:
       WORDPRESS_DB_HOST: db:3306
@@ -30,7 +31,7 @@ services:
       WP_DOMAIN: ${WP_DOMAIN}
       WP_TITLE: ${WP_TITLE}
     volumes:
-      - wordpress:${DOCROOT_PATH}
+      - ./wordpress:${DOCROOT_PATH}
       - ${BASE_PATH}:${PROJECT_MOUNT_PATH}
     ports:
       - 80:80
@@ -85,8 +86,18 @@ services:
         PHP_BUILD_VERSION: $PHP_BUILD_VERSION
     container_name: "${PROJECT_NAME}_test"
     working_dir: ${BUILD_ROOT_PATH}
+    depends_on:
+      - db
+      - behat
     volumes:
       -  ${BASE_PATH}:${BUILD_ROOT_PATH}
+
+  behat:
+    image: docksal/behat:latest
+    container_name: "${PROJECT_NAME}_behat"
+    working_dir: ${BUILD_ROOT_PATH}
+    volumes:
+      - ${BASE_PATH}:/src
 
 volumes:
   wordpress:
